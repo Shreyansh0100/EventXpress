@@ -11,9 +11,8 @@ import Loading from './components/Loading'
 import LocationSelector from './components/LocationSelector' 
 
 // --- PUBLIC PAGES ---
-import Landing from './pages/Landing' // 🚨 IMPORTED NEW LANDING PAGE
+import Landing from './pages/Landing' 
 import Home from './pages/Home'
-import Movies from './pages/Movies'
 import MovieDetails from './pages/MovieDetails'
 import SeatLayout from './pages/SeatLayout'
 import Checkout from './pages/Checkout'
@@ -145,11 +144,10 @@ const App = () => {
       <div className="flex-grow">
         <Routes>
           {/* --- PUBLIC ROUTES --- */}
-          {/* 🚨 Set Landing as the root, moved Home to /home */}
           <Route path='/' element={<Landing />} />
           <Route path='/home' element={<Home />} />
           
-          <Route path='/movies' element={<Movies />} />
+
           <Route path='/movies/:id' element={<MovieDetails />} />
           <Route path='/theaters' element={<Theaters />} /> 
           <Route path='/theater/:id' element={<TheaterDetails />} />

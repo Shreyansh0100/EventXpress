@@ -2,11 +2,9 @@ import React from 'react';
 import { UserButton, useAuth } from '@clerk/clerk-react';
 import { useAppContext } from '../../context/AppContext';
 import { MapPin, ShieldCheck, Navigation } from 'lucide-react';
-
 const CinemaNavbar = () => {
     const { user, dbUser } = useAppContext();
     const { isLoaded } = useAuth();
-
     // Determine the theater name exactly how the backend defines or fallback to a standard name.
     const cinemaName = dbUser?.theaterName || dbUser?.theaterConfig?.name || dbUser?.name || 'Box Office Console';
     const userRole = dbUser?.role === 'admin' ? 'System Administrator' : 'Cinema Manager';

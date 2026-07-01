@@ -83,7 +83,7 @@ const Wallet = () => {
                         </div>
 
                         <button 
-                            onClick={() => navigate('/movies')}
+                            onClick={() => navigate('/Home')}
                             className="w-full md:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-white text-black font-bold rounded-2xl hover:bg-gray-200 transition-all active:scale-95 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.2)] text-sm sm:text-base shrink-0"
                         >
                             Book a Movie <ArrowRight size={18} className="sm:w-5 sm:h-5"/>
