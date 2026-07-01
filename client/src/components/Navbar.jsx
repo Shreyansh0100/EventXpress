@@ -33,7 +33,7 @@ const Navbar = () => {
     if (searchOpen && searchRef.current) searchRef.current.focus();
   }, [searchOpen]);
 
-  const navLinks = [
+  const navLinks = [//the links on navbar
     { to: '/home', label: 'Home' },
     { to: '/theaters', label: 'Theaters', icon: <Clapperboard size={13} /> },
     { to: '/support', label: 'Support', icon: <Headset size={13} /> },

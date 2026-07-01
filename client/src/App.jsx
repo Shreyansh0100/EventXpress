@@ -17,7 +17,6 @@ import MovieDetails from './pages/MovieDetails'
 import SeatLayout from './pages/SeatLayout'
 import Checkout from './pages/Checkout'
 import MyBookings from './pages/MyBookings'
-import Favorite from './pages/Favorite'
 import Wallet from './pages/Wallet' 
 import Theaters from './pages/Theaters' 
 import TheaterDetails from './pages/TheaterDetails' 
@@ -154,7 +153,6 @@ const App = () => {
           <Route path='/book-seats/:showId' element={<SeatLayout />} />
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/my-bookings' element={<MyBookings />} />
-          <Route path='/favorite' element={<Favorite />} />
           <Route path='/wallet' element={<Wallet />} />
           <Route path='/support' element={<Support />} /> 
           <Route path='/loading/:nextUrl' element={<Loading />} />
