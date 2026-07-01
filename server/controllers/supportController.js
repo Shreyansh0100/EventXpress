@@ -1,3 +1,4 @@
+import { askAI } from "../services/ai.js";
 import Ticket from "../models/Ticket.js";
 
 // 1. Create a new Support Ticket & Chat
@@ -19,9 +20,13 @@ export const createTicket = async (req, res) => {
         };
 
         // Automated AI Response to make it feel futuristic
+        const aiMessage = await askAI(
+            `A user has opened a support ticket with subject: ${subject}`
+        );
+        
         const automatedAIResponse = {
-            sender: 'AI',
-            text: `Hello! I'm the  AI Assistant. I have received your request regarding "${subject}". An agent has been notified and will join this chat shortly. Please type any additional details below.`
+            sender: "AI",
+            text: aiMessage
         };
 
         const newTicket = new Ticket({
@@ -64,29 +69,57 @@ export const getUserTickets = async (req, res) => {
 // 3. Add a new message to an existing chat
 export const addChatMessage = async (req, res) => {
     try {
-        const { ticketId, text, sender } = req.body; 
-        
+        console.log("Message endpoint called");
+console.log(req.body);
+        const { ticketId, text, sender } = req.body;
+
         const ticket = await Ticket.findById(ticketId);
-        
+
         if (!ticket) {
-            return res.status(404).json({ success: false, message: "Ticket not found" });
+            return res.status(404).json({
+                success: false,
+                message: "Ticket not found"
+            });
         }
 
-        // Push the new message to the array
+        // Save user message
         ticket.messages.push({
-            sender: sender || 'User',
-            text: text
+            sender: sender || "User",
+            text
         });
 
-        // Update the status if an agent replies
-        if (sender === 'Agent' && ticket.status === 'Open') {
-            ticket.status = 'In Progress';
+        // AI replies only to user
+        if ((sender || "User") === "User") {
+
+            const aiReply = await askAI(text);
+
+            ticket.messages.push({
+                sender: "AI",
+                text: aiReply
+            });
+
+        }
+
+        // Agent changes status
+        if (sender === "Agent" && ticket.status === "Open") {
+            ticket.status = "In Progress";
         }
 
         await ticket.save();
 
-        res.json({ success: true, message: "Message sent", ticket });
+        res.json({
+            success: true,
+            ticket
+        });
+
     } catch (error) {
-        res.json({ success: false, message: error.message });
+
+        console.log(error);
+
+        res.json({
+            success: false,
+            message: error.message
+        });
+
     }
 };

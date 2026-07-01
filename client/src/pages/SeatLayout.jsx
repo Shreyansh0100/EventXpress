@@ -4,7 +4,6 @@ import { useAppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
 import { AlertCircle, ArrowRight, ScreenShare, Ticket, Crown, Zap, Lock } from 'lucide-react'; 
 import Loading from '../components/Loading';
-
 import { io } from 'socket.io-client';
 
 // --- LOGICAL FIX: Default Layout Fallback ---
@@ -63,7 +62,7 @@ const SeatLayout = () => {
                     setIsSurgeActive(data.isSurgeActive);
                     setSurgeMultiplier(data.surgeMultiplier);
                     
-                    // 🚨 CATCH THE ID FROM THE BACKEND HERE
+                    //  CATCH THE ID FROM THE BACKEND HERE
                     if (data.theaterId) {
                         setFallbackTheaterId(data.theaterId);
                     }
@@ -171,9 +170,7 @@ const SeatLayout = () => {
             }
         });
     };
-
     const subtotal = selectedSeats.reduce((sum, seatId) => sum + getSeatPrice(seatId), 0);
-
     const handleProceed = () => {
         if (!user) {
             toast.error("Please log in to continue");
